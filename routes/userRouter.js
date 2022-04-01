@@ -1,6 +1,9 @@
 const user = require("./users");
 
 async function routes(fastify) {
+  fastify.get("/", async (request, reply) => {
+    reply.send({ hello: "world" });
+  });
   fastify.get("/displayAll", user.getAllUser);
   fastify.get("/displayById/:id", user.getAllUserById);
   fastify.post("/addUser", user.addUser);
