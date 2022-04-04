@@ -6,13 +6,13 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "nodemon server",
-    "dev":"PORT=${PORT:=3000} HOST=${HOST:=localhost} nodemon"
-    
+    "dev": "PORT=${PORT:=3000} HOST=${HOST:=localhost} nodemon"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "dotenv": "^16.0.0",
     "fastify": "^3.27.4",
     "mysql2": "^2.3.3",
     "nodemon": "^2.0.15"

@@ -1,6 +1,7 @@
 const fastify = require("fastify")({ logger: true, pluginTimeout: 10000 });
-// const pool = require("./config/db");
-const PORT = 5000;
+const dotenv = require("dotenv");
+dotenv.config();
+
 const routes = require("./routes/userRouter");
 
 fastify.register(routes);

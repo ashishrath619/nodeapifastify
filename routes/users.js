@@ -13,9 +13,10 @@ const getAllUser = async (request, reply) => {
 const getAllUserById = async (request, reply) => {
   let id = request.params.id;
   try {
-    let [result] = await pool.query("SELECT * FROM adminuser where id = ?", [
-      id,
-    ]);
+    let [result] = await pool.query(
+      "SELECT * FROM adminuser where adminid = ?",
+      [id]
+    );
     reply.status(200).send(result);
   } catch (err) {
     console.log("err", err);
@@ -53,7 +54,9 @@ const LoginUser = async (request, reply) => {
 const deleteUserById = async (request, reply) => {
   let id = request.params.id;
   try {
-    let result = await pool.query("delete FROM adminuser where id = ?", [id]);
+    let result = await pool.query("delete FROM adminuser where adminid = ?", [
+      id,
+    ]);
     reply.status(200).send(result);
   } catch (err) {
     console.log("err", err);
@@ -80,7 +83,7 @@ const updateUser = async (request, reply) => {
     const { name, email, password } = request.body;
 
     let result = await pool.query(
-      "update  adminuser  set name=?,email=?,password=? where id=?",
+      "update  adminuser  set name=?,email=?,password=? where adminid=?",
       [name, email, password, id]
     );
     reply.status(201).send(result);
