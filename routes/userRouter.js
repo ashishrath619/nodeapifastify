@@ -10,6 +10,7 @@ async function routes(fastify) {
   fastify.post("/addUser", user.addUser);
   fastify.put("/updateUser/:id", user.updateUser);
   fastify.post("/checkLogin", user.LoginUser);
+  fastify.delete("/deleteUser/:id", user.deleteUserById);
 }
 
 module.exports = routes;
