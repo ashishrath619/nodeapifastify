@@ -1,4 +1,4 @@
-const fastify = require("fastify")({ logger: true });
+const fastify = require("fastify")({ logger: true, pluginTimeout: 10000 });
 // const pool = require("./config/db");
 const PORT = 5000;
 const routes = require("./routes/userRouter");
@@ -17,7 +17,7 @@ fastify.register(routes);
 //   }
 // });
 const start = async () => {
-  fastify.listen(3000, "0.0.0.0", function (err, address) {
+  fastify.listen(5000, function (err, address) {
     if (err) {
       fastify.log.error(err);
       process.exit(1);
