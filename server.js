@@ -17,13 +17,17 @@ fastify.register(routes);
 //   }
 // });
 const start = async () => {
-  fastify.listen(5000, function (err, address) {
-    if (err) {
-      fastify.log.error(err);
-      process.exit(1);
+  fastify.listen(
+    process.env.PORT,
+    process.env.HOST || "0.0.0.0",
+    function (err, address) {
+      if (err) {
+        fastify.log.error(err);
+        process.exit(1);
+      }
+      fastify.log.info(`server listening on ${address}`);
     }
-    fastify.log.info(`server listening on ${address}`);
-  });
+  );
   // try {
   //   await fastify.listen(3000, (err) => {
   //     if (err) {
