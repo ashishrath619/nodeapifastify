@@ -2,7 +2,7 @@ const pool = require("../config/db");
 
 const getAllUser = async (request, reply) => {
   try {
-    let result = await pool.query("SELECT * FROM adminuser");
+    let [result] = await pool.query("SELECT * FROM adminuser");
     reply.status(200).send(result);
   } catch (err) {
     console.log("err", err);
@@ -13,7 +13,9 @@ const getAllUser = async (request, reply) => {
 const getAllUserById = async (request, reply) => {
   let id = request.params.id;
   try {
-    let result = await pool.query("SELECT * FROM adminuser where id = ?", [id]);
+    let [result] = await pool.query("SELECT * FROM adminuser where id = ?", [
+      id,
+    ]);
     reply.status(200).send(result);
   } catch (err) {
     console.log("err", err);

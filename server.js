@@ -17,17 +17,24 @@ fastify.register(routes);
 //   }
 // });
 const start = async () => {
-  try {
-    await fastify.listen(3000, "0.0.0.0", (err) => {
-      if (err) {
-        app.log.error(err);
-        process.exit(1);
-      }
-    });
-  } catch (error) {
-    fastify.log.error(error);
-    process.exit(1);
-  }
+  fastify.listen(3000, "0.0.0.0", function (err, address) {
+    if (err) {
+      fastify.log.error(err);
+      process.exit(1);
+    }
+    fastify.log.info(`server listening on ${address}`);
+  });
+  // try {
+  //   await fastify.listen(3000, (err) => {
+  //     if (err) {
+  //       fastify.log.error(err);
+  //       process.exit(1);
+  //     }
+  //   });
+  // } catch (error) {
+  //   fastify.log.error(error);
+  //   process.exit(1);
+  // }
 };
 
 start();
