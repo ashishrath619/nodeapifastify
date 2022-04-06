@@ -10,9 +10,9 @@ fastify.register(require("fastify-swagger"), {
   routePrefix: "/docs",
   swagger: {
     info: {
-      title: "Fastify Swagger",
-      description: "Testing the Fastify swagger API",
-      version: "0.1.0",
+      title: "Admin Api",
+      description: "Testing the Admin APIs ",
+      version: "1.0",
     },
   },
 });
