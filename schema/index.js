@@ -27,6 +27,34 @@ const getAllUserOpt = {
   handler: getAllUser,
 };
 
+const getAllUserByIdOpt = {
+  schema: {
+    params: {
+      type: "object",
+      properties: {
+        id: {
+          type: "string",
+          description: "user id",
+        },
+      },
+    },
+    response: {
+      200: {
+        type: "array",
+        items: {
+          type: "object",
+          properties: {
+            adminid: { type: "number" },
+            name: { type: "string" },
+            email: { type: "string" },
+            password: { type: "string" },
+          },
+        },
+      },
+    },
+  },
+  handler: getAllUserById,
+};
 const LoginUserOpt = {
   schema: {
     body: {
@@ -56,6 +84,23 @@ const LoginUserOpt = {
 };
 const addUserOpts = {
   schema: {
+    params: {
+      type: "object",
+      properties: {
+        name: {
+          type: "string",
+          description: "user name",
+        },
+        email: {
+          type: "string",
+          description: "user email",
+        },
+        password: {
+          type: "string",
+          description: "user password",
+        },
+      },
+    },
     body: {
       type: "object",
       required: ["name", "email", "password"],
@@ -83,6 +128,28 @@ const addUserOpts = {
 
 const updateUserOpts = {
   schema: {
+    params: {
+      type: "object",
+      properties: {
+        adminid: {
+          type: "number",
+          description: "user id",
+        },
+        name: {
+          type: "string",
+          description: "user name",
+        },
+
+        email: {
+          type: "string",
+          description: "user email",
+        },
+        password: {
+          type: "string",
+          description: "user password",
+        },
+      },
+    },
     200: {
       type: "object",
       items: {
@@ -99,6 +166,15 @@ const updateUserOpts = {
 
 const deleteUserByIdOpts = {
   schema: {
+    params: {
+      type: "object",
+      properties: {
+        id: {
+          type: "string",
+          description: "user id",
+        },
+      },
+    },
     200: {
       type: "object",
       items: {
@@ -119,6 +195,7 @@ module.exports = {
   updateUserOpts,
   deleteUserByIdOpts,
   LoginUserOpt,
+  getAllUserByIdOpt,
   //   addBookOpts,
   //   updateBookOpts,
   //   deleteBookOpts,

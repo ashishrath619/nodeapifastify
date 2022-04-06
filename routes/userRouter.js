@@ -4,6 +4,7 @@ const {
   addUserOpts,
   updateUserOpts,
   deleteUserByIdOpts,
+  getAllUserByIdOpt,
 } = require("../schema/index");
 
 async function routes(fastify) {
@@ -12,7 +13,7 @@ async function routes(fastify) {
   });
 
   fastify.get("/displayAll", getAllUserOpt);
-  fastify.get("/displayById/:id", user.getAllUserById);
+  fastify.get("/displayById/:id", getAllUserByIdOpt);
   fastify.post("/addUser", addUserOpts);
   fastify.put("/updateUser/:id", updateUserOpts);
   fastify.post("/checkLogin", user.LoginUser);

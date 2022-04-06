@@ -36,11 +36,15 @@ const LoginUser = async (request, reply) => {
       let pwd = result[0].password;
       if (pwd == password) {
         output["status"] = 1;
-        output["message"] = "User verified ";
+        output["message"] = "User verified";
       } else {
+        output["status"] = 0;
+
         output["message"] = "Invalid username and password";
       }
     } else {
+      output["status"] = 0;
+
       output["message"] = "Invalid username and password";
     }
     console.log(result);
