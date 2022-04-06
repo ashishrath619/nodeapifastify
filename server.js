@@ -1,6 +1,10 @@
 const fastify = require("fastify")({ logger: true, pluginTimeout: 10000 });
+const fastifyCors = require("fastify-cors");
+
 const dotenv = require("dotenv");
 dotenv.config();
+
+fastify.register(fastifyCors, {});
 
 const routes = require("./routes/userRouter");
 
