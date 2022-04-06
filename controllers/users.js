@@ -66,12 +66,19 @@ const deleteUserById = async (request, reply) => {
 const addUser = async (request, reply) => {
   try {
     const { name, email, password } = request.body;
-
-    let result = await pool.query(
-      "insert into adminuser (name,email,password) values(?,?,?)",
-      [name, email, password]
+    let [checkEmail] = await pool.query(
+      "SELECT * FROM adminuser where email = ?",
+      [email]
     );
-    reply.status(201).send(result);
+    if (checkEmail.length > 0) {
+      reply.status(200).send({ message: "Email already exists" });
+    } else {
+      let result = await pool.query(
+        "insert into adminuser (name,email,password) values(?,?,?)",
+        [name, email, password]
+      );
+      reply.status(201).send(result);
+    }
   } catch (err) {
     console.log("err", err);
     reply.status(500).send(err);
@@ -94,10 +101,10 @@ const updateUser = async (request, reply) => {
 };
 
 module.exports = {
-  getAllUser: getAllUser,
-  getAllUserById: getAllUserById,
-  deleteUserById: deleteUserById,
-  addUser: addUser,
-  updateUser: updateUser,
-  LoginUser: LoginUser,
+  getAllUser,
+  getAllUserById,
+  deleteUserById,
+  addUser,
+  updateUser,
+  LoginUser,
 };
