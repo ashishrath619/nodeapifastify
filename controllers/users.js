@@ -103,11 +103,47 @@ const updateUser = async (request, reply) => {
     reply.status(500).send(err);
   }
 };
+const updateUserPassword = async (request, reply) => {
+  // let id = request.params.id;
+  const { email, password } = request.body;
+
+  let [checkEmail] = await pool.query(
+    "SELECT * FROM adminuser where email = ?",
+    [email]
+  );
+
+  if (checkEmail.length > 0) {
+    let result = await pool.query(
+      "update  adminuser  set password=? where email=?",
+      [password, email]
+    );
+    reply
+      .status(200)
+      .send({ message: "Password Updated Successfully" }, result);
+  } else {
+    reply.status(500).send({ message: "Email does not exists" });
+  }
+
+  // try {
+  //   const { email, password } = request.body;
+  //   console.log(email, password);
+
+  //   let result = await pool.query(
+  //     "update  adminuser  set password=? where email=?",
+  //     [password, email]
+  //   );
+  //   reply.status(201).send(result);
+  // } catch (err) {
+  //   console.log("err", err);
+  //   reply.status(500).send(err);
+  // }
+};
 
 module.exports = {
   getAllUser,
   getAllUserById,
   deleteUserById,
+  updateUserPassword,
   addUser,
   updateUser,
   LoginUser,

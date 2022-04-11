@@ -16,6 +16,7 @@ async function routes(fastify) {
   fastify.get("/displayById/:id", getAllUserByIdOpt);
   fastify.post("/addUser", addUserOpts);
   fastify.put("/updateUser/:id", updateUserOpts);
+  fastify.put("/updateUserPassword", user.updateUserPassword);
   fastify.post("/checkLogin", user.LoginUser);
   fastify.delete("/deleteUser/:id", deleteUserByIdOpts);
 }
