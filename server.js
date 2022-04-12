@@ -18,8 +18,10 @@ fastify.register(require("fastify-swagger"), {
 });
 
 const routes = require("./routes/userRouter");
+const routeradmin = require("./routes/userAdminRouter");
 
 fastify.register(routes);
+fastify.register(routeradmin, { prefix: "/admin" });
 
 const start = async () => {
   fastify.listen(

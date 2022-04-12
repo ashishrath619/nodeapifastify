@@ -92,6 +92,7 @@ const updateUser = async (request, reply) => {
   let id = request.params.id;
   try {
     const { name, email, password } = request.body;
+    console.log(JSON.stringify(req.body));
 
     let result = await pool.query(
       "update  adminuser  set name=?,email=?,password=? where adminid=?",
@@ -123,20 +124,6 @@ const updateUserPassword = async (request, reply) => {
   } else {
     reply.status(500).send({ message: "Email does not exists" });
   }
-
-  // try {
-  //   const { email, password } = request.body;
-  //   console.log(email, password);
-
-  //   let result = await pool.query(
-  //     "update  adminuser  set password=? where email=?",
-  //     [password, email]
-  //   );
-  //   reply.status(201).send(result);
-  // } catch (err) {
-  //   console.log("err", err);
-  //   reply.status(500).send(err);
-  // }
 };
 
 module.exports = {

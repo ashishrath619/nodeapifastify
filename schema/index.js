@@ -128,7 +128,7 @@ const addUserOpts = {
 
 const updateUserOpts = {
   schema: {
-    params: {
+    body: {
       type: "object",
       properties: {
         adminid: {
