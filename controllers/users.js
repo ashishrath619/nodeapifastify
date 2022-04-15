@@ -48,7 +48,11 @@ const LoginUser = async (request, reply) => {
       output["message"] = "Invalid username and password";
     }
     console.log(result);
-    reply.status(200).send(output);
+    if (output.status > 0) {
+      reply.status(200).send({ output, data: result });
+    } else {
+      reply.status(200).send({ output, data: [] });
+    }
   } catch (err) {
     console.log("err", err);
     reply.status(500).send(err);
@@ -120,9 +124,14 @@ const updateUserPassword = async (request, reply) => {
     );
     reply
       .status(200)
-      .send({ message: "Password Updated Successfully" }, result);
+      .send(
+        { statusCode: 200, message: "Password Updated Successfully" },
+        result
+      );
   } else {
-    reply.status(500).send({ message: "Email does not exists" });
+    reply
+      .status(500)
+      .send({ statusCode: 500, message: "Email does not exists" });
   }
 };
 
