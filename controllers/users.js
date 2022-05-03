@@ -96,7 +96,7 @@ const updateUser = async (request, reply) => {
   let id = request.params.id;
   try {
     const { name, email, password } = request.body;
-    console.log(JSON.stringify(req.body));
+    // console.log(JSON.stringify(req.body));
 
     let result = await pool.query(
       "update  adminuser  set name=?,email=?,password=? where adminid=?",
